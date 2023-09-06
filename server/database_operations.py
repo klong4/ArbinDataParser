@@ -17,12 +17,18 @@ def init_db():
                      );''')
         conn.commit()
 
-# Insert a new record
+#insert a new record
 def insert_record(part_number, date_time, test_time, current, voltage):
     with closing(sqlite3.connect(DATABASE)) as conn:
         c = conn.cursor()
-        c.execute('INSERT INTO tests (part_number, Date_Time, "Test_Time(s)", "Current(A)", "Voltage(V)") VALUES (?, ?, ?, ?, ?)',
-                  (part_number, date_time, test_time, current, voltage))
+        # Convert Series to list
+        test_time = test_time.tolist()
+        current = current.tolist()
+        voltage = voltage.tolist()
+        # Insert each row
+        for t, c, v in zip(test_time, current, voltage):
+            c.execute('INSERT INTO tests (part_number, Date_Time, "Test_Time(s)", "Current(A)", "Voltage(V)") VALUES (?, ?, ?, ?, ?)',
+                      (part_number, date_time, t, c, v))
         conn.commit()
 
 # Retrieve records by part_number and date
