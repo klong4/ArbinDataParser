@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+<body>
+
+    <h1>Test Graph for Part Number: {{ part_number }}</h1>
+    <h2>Date: {{ test_date }}</h2>
+
+    <div>
+        <canvas id="testGraph" width="800" height="600"></canvas>
+    </div>
+
+    <script>
+        // Sample data; you will replace these with data from your server
+        const testTime = {{ test_time|tojson }};
+        const currentA = {{ currentA|tojson }};
+        const voltageV = {{ voltageV|tojson }};
+
+        // Crosshair points; replace these with your specific points
+        const crosshairX = [2, 4];
+        const crosshairCurrentA = [20, 40];
+        const crosshairVoltageV = [10, 20];
+
+        const ctx = document.getElementById('testGraph').getContext('2d');
+
+        // Create the chart
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: testTime,
+                datasets: [
+                    {
+                        label: 'Current (A)',
+                        yAxisID: 'A',
+                        data: currentA,
+                        borderColor: 'blue',
+                        fill: false
+                    },
+                    {
+                        label: 'Voltage (V)',
+                        yAxisID: 'V',
+                        data: voltageV,
+                        borderColor: 'red',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            text: 'Test Time',
+                            display: true
+                        }
+                    },
+                    A: {
+                        type: 'linear',
+                        position: 'left',
+                        title: {
+                            text: 'Current (A)',
+                            display: true
+                        }
+                    },
+                    V: {
+                        type: 'linear',
+                        position: 'right',
+                        title: {
+                            text: 'Voltage (V)',
+                            display: true
+                        }
+                    }
+                },
+                plugins: {
+                    // Add plugin options for crosshairs here
+                }
+            }
+        });
+
+        // Logic for adding crosshairs can go here
+    </script>
+
+</body>
+</html>
