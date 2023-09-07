@@ -36,19 +36,21 @@ def update_record(id, part_number, date_time, test_time, current, voltage):
         conn.commit()
 
 # Save data to the database (now prepares all data for a bulk insert)
-def save_to_db(part_number, date, df):
-    records = []
-    for index, row in df.iterrows():
-        test_time = row['Test_Time(s)']
-        current = row['Current(A)']
-        voltage = row['Voltage(V)']
+def save_to_db(part_number, test_time, selected_columns):
+    try:
+        with closing(sqlite3.connect(DATABASE)) as conn:
+            c = conn.cursor()
+            
+            records = []
+            for index, row in selected_columns.iterrows():
+                # Assume the DataFrame columns align with your SQL table
+                records.append((part_number, test_time, row['Test_Time(s)'], row['Current(A)'], row['Voltage(V)']))
 
-        # Prepare the record
-        record = (part_number, date, test_time, current, voltage)
-        records.append(record)
+            insert_record(records)  # Assuming you've a function to insert records
+            conn.commit()
 
-    # Bulk insert all the records
-    insert_record(records)
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
 
 # Retrieve records by part_number and date
 def get_records(part_number, test_date):

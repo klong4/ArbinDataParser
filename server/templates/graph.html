@@ -21,8 +21,10 @@
         <button type="submit">Delete Record</button>
     </form>
 
+    <!-- Back button -->
+    <button id="backButton">Go Back</button>
+
     <script>
-        // Sample data; you will replace these with data from your server
         const testTime = {{ test_time|tojson }};
         const currentA = {{ currentA|tojson }};
         const voltageV = {{ voltageV|tojson }};
@@ -34,17 +36,16 @@
 
         const ctx = document.getElementById('{{ part_number }}').getContext('2d');
 
-        // Loop through your data to build annotations based on Step_Index and Cycle_Index
-        let lastStepIndex = stepIndices[0];  // Initialize to the first element
-        let lastCycleIndex = cycleIndices[0];  // Initialize to the first element
+        let lastStepIndex = stepIndices[0];
+        let lastCycleIndex = cycleIndices[0];
 
-        for (let i = 1; i < stepIndices.length; i++) {  // Start loop from 1 to compare with the first element
+        for (let i = 1; i < stepIndices.length; i++) {
             if (stepIndices[i] > lastStepIndex) {
                 annotations.push({
                     type: 'line',
                     mode: 'vertical',
                     scaleID: 'x',
-                    value: testTime[i-1],  // Record the point just before the increment for Step_Index
+                    value: testTime[i-1],
                     borderColor: 'grey',
                     borderWidth: 2,
                     borderDash: [2, 2],
@@ -53,30 +54,28 @@
                         content: 'T' + annotationCounter++
                     }
                 });
-                lastStepIndex = stepIndices[i];  // Update the last step index
+                lastStepIndex = stepIndices[i];
             }
 
-    if (cycleIndices[i] > lastCycleIndex) {
-        annotations.push({
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x',
-            value: testTime[i],  // Record the point at which it increments for Cycle_Index
-            borderColor: 'grey',
-            borderWidth: 2,
-            borderDash: [2, 2],
-            label: {
-                enabled: true,
-                content: 'C' + cycleIndices[i]
+            if (cycleIndices[i] > lastCycleIndex) {
+                annotations.push({
+                    type: 'line',
+                    mode: 'vertical',
+                    scaleID: 'x',
+                    value: testTime[i],
+                    borderColor: 'grey',
+                    borderWidth: 2,
+                    borderDash: [2, 2],
+                    label: {
+                        enabled: true,
+                        content: 'C' + cycleIndices[i]
+                    }
+                });
+                annotationCounter = 1;
+                lastCycleIndex = cycleIndices[i];
             }
-        });
-        annotationCounter = 1;  // Reset counter for new cycle
-        lastCycleIndex = cycleIndices[i];  // Update the last cycle index
-    }
-}
+        }
 
-
-        // Create the chart
         const myChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -157,7 +156,9 @@
             }
         });
 
-        // Populate the 'annotations' array and update the chart
+        document.getElementById('backButton').addEventListener('click', function() {
+            window.history.back();
+        });
     </script>
 </body>
 </html>

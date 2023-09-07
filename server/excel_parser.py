@@ -38,13 +38,13 @@ def extract_columns(df, columns=['Date_Time', 'Test_Time(s)', 'Current(A)', 'Vol
         print(f"Column not found: {e}")
         return None
 
-def extract_date(df, date_column='Date_Time'):
+def extract_test_time(df, time_column='Test_Time(s)'):
     try:
-        first_date_entry = df[date_column].iloc[0]
-        date = first_date_entry.split(' ')[0]
-        return date
+        first_test_time_entry = df[time_column].iloc[0]
+        print(f"Debug: First test time entry: {first_test_time_entry}")  # Debug log
+        return first_test_time_entry
     except Exception as e:
-        print(f"An error occurred while extracting the date: {e}")
+        print(f"An error occurred while extracting the test_time: {e}")
         return None
 
 # Example usage
