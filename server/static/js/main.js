@@ -1,9 +1,9 @@
 // Create a Web Worker
-const dataWorker = new Worker('static/dataWorker.js');
+const dataWorker = new Worker('static/js/dataWorker.js');
 
-// Function to update part numbers (assuming you have an API to fetch them)
+// Function to update part numbers
 function updatePartNumbers() {
-  fetch('/api/get_part_numbers')
+  fetch('/api/extract_part_number')
     .then(response => response.json())
     .then(data => {
       const partNumberSelect = document.getElementById('partNumberSelect');
@@ -30,22 +30,31 @@ function submitData() {
   })
   .then(response => response.json())
   .then(data => {
-    // Send data to your Web Worker for computation
-    dataWorker.postMessage(data);
+    // Send data to the Web Worker for computation
+    dataWorker.postMessage({ type: 'INITIAL_LOAD', data });
   })
   .catch(error => {
     console.error('Error:', error);
   });
 }
 
-// Receive computed data from your Web Worker
+// Function to handle lazy loading
+function lazyLoadData() {
+  // You can define logic here to decide which data to load next
+  // For now, this function just sends a message to the worker to fetch more data
+  dataWorker.postMessage({ type: 'LAZY_LOAD' });
+}
+
+// Receive computed data from the Web Worker
 dataWorker.onmessage = function(e) {
-  const { graphURL } = e.data;
-  // Render the graph
-  if (graphURL) {
-    renderGraph(graphURL);
-  } else {
-    alert('No data found for the selected part number and date.');
+  const { type, payload } = e.data;
+  
+  if (type === 'INITIAL_LOAD') {
+    // Handle initial data load here
+    renderGraph(payload.graphURL);
+  } else if (type === 'LAZY_LOAD') {
+    // Handle lazy-loaded data here
+    updateGraph(payload.graphURL);
   }
 };
 
@@ -58,10 +67,23 @@ function renderGraph(graphURL) {
   graphContainer.appendChild(img);
 }
 
+// Function to update the graph with lazy-loaded data
+function updateGraph(graphURL) {
+  // Logic to update the existing graph
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
   updatePartNumbers();
-
+  
   const submitButton = document.getElementById('submitButton');
   submitButton.addEventListener('click', submitData);
+  
+  // Add an event listener to initiate lazy loading when user scrolls to the end of the graph
+  const graphContainer = document.getElementById('graphContainer');
+  graphContainer.addEventListener('scroll', function() {
+    if (graphContainer.scrollTop + graphContainer.clientHeight >= graphContainer.scrollHeight) {
+      lazyLoadData();
+    }
+  });
 });

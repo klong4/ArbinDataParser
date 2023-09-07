@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
-from database_operations import save_to_db, get_records  # Assuming this is where your save_to_db and get_records functions are
-from excel_parser import parse_excel_file  # Assuming this is where your parse_excel_file function is
+from database_operations import save_to_db, get_records, delete_record  # Assuming this is where your save_to_db and get_records functions are
+from excel_parser import parse_excel_file # Assuming this is where your parse_excel_file function is
 import os
 
 app = Flask(__name__)
@@ -50,14 +50,37 @@ def show_graph(part_number, test_date):
     standard_date = test_date.replace("-", "/")
 
     data = get_records(part_number, standard_date)
+    if data is None:
+        return redirect(url_for('index'))
     if data:
         test_time = [x[0] for x in data]
         currentA = [x[1] for x in data]
         voltageV = [x[2] for x in data]
+        step_indices = [x[3] for x in data]
+        cycle_indices = [x[4] for x in data]
         
-        return render_template('graph.html', part_number=part_number, test_date=standard_date, test_time=test_time, currentA=currentA, voltageV=voltageV)
+        return render_template('graph.html', 
+                       part_number=part_number, 
+                       test_date=standard_date, 
+                       test_time=test_time, 
+                       currentA=currentA, 
+                       voltageV=voltageV,
+                       step_indices=step_indices,
+                       cycle_indices=cycle_indices)
     else:
         return "No data found for given parameters"
+
+@app.route('/delete_record/<part_number>/<test_date>', methods=['POST'])
+def delete_record_route(part_number, test_date):
+    print("Inside delete_record_route")  # Debugging line
+
+    # Convert the URL-friendly date back to your standard date format, if needed
+    standard_date = test_date.replace("-", "/")
+    
+    # Delete the record (assuming you have a function named `delete_from_db` to do this)
+    delete_record(part_number, standard_date)
+    
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

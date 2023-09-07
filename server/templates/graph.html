@@ -2,31 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test Graph</title>
+    <title>Arbin Voltage and Current / Time: {{ part_number }}</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
-<body>
+<body style="background-color: #2b2b2b; color: #e1e1e1;">
 
-    <h1>Test Graph for Part Number: {{ part_number }}</h1>
+    <h1>Arbin Voltage and Current / Time: {{ part_number }}</h1>
     <h2>Date: {{ test_date }}</h2>
 
-    <div>
-        <canvas id="testGraph" width="800" height="600"></canvas>
+    <div style="width: 100%; height: 80vh;">
+        <canvas id="{{ part_number }}"></canvas>
     </div>
+
+    <!-- Delete button -->
+    <form action="{{ url_for('delete_record_route', part_number=part_number, test_date=test_date.replace('/', '-')) }}" method="post">
+        <button type="submit">Delete Record</button>
+    </form>
 
     <script>
         // Sample data; you will replace these with data from your server
         const testTime = {{ test_time|tojson }};
         const currentA = {{ currentA|tojson }};
         const voltageV = {{ voltageV|tojson }};
+        const stepIndices = {{ step_indices|tojson }};
+        const cycleIndices = {{ cycle_indices|tojson }};
 
-        // Crosshair points; replace these with your specific points
-        const crosshairX = [2, 4];
-        const crosshairCurrentA = [20, 40];
-        const crosshairVoltageV = [10, 20];
+        const annotations = [];
+        let annotationCounter = 1;
 
-        const ctx = document.getElementById('testGraph').getContext('2d');
+        const ctx = document.getElementById('{{ part_number }}').getContext('2d');
+
+        // Loop through your data to build annotations based on Step_Index and Cycle_Index
+        let lastStepIndex = stepIndices[0];  // Initialize to the first element
+        let lastCycleIndex = cycleIndices[0];  // Initialize to the first element
+
+        for (let i = 1; i < stepIndices.length; i++) {  // Start loop from 1 to compare with the first element
+            if (stepIndices[i] > lastStepIndex) {
+                annotations.push({
+                    type: 'line',
+                    mode: 'vertical',
+                    scaleID: 'x',
+                    value: testTime[i-1],  // Record the point just before the increment for Step_Index
+                    borderColor: 'grey',
+                    borderWidth: 2,
+                    borderDash: [2, 2],
+                    label: {
+                        enabled: true,
+                        content: 'T' + annotationCounter++
+                    }
+                });
+                lastStepIndex = stepIndices[i];  // Update the last step index
+            }
+
+    if (cycleIndices[i] > lastCycleIndex) {
+        annotations.push({
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x',
+            value: testTime[i],  // Record the point at which it increments for Cycle_Index
+            borderColor: 'grey',
+            borderWidth: 2,
+            borderDash: [2, 2],
+            label: {
+                enabled: true,
+                content: 'C' + cycleIndices[i]
+            }
+        });
+        annotationCounter = 1;  // Reset counter for new cycle
+        lastCycleIndex = cycleIndices[i];  // Update the last cycle index
+    }
+}
+
 
         // Create the chart
         const myChart = new Chart(ctx, {
@@ -38,19 +86,25 @@
                         label: 'Current (A)',
                         yAxisID: 'A',
                         data: currentA,
-                        borderColor: 'blue',
+                        borderColor: '#e1e1e1',
+                        backgroundColor: 'rgba(225, 225, 225, 0.2)',
+                        pointBorderColor: '#e1e1e1',
                         fill: false
                     },
                     {
                         label: 'Voltage (V)',
                         yAxisID: 'V',
                         data: voltageV,
-                        borderColor: 'red',
+                        borderColor: '#007bff',
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        pointBorderColor: '#007bff',
                         fill: false
                     }
                 ]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     x: {
                         type: 'linear',
@@ -58,6 +112,12 @@
                         title: {
                             text: 'Test Time',
                             display: true
+                        },
+                        grid: {
+                            color: '#444'
+                        },
+                        ticks: {
+                            color: '#e1e1e1'
                         }
                     },
                     A: {
@@ -66,6 +126,12 @@
                         title: {
                             text: 'Current (A)',
                             display: true
+                        },
+                        grid: {
+                            color: '#444'
+                        },
+                        ticks: {
+                            color: '#e1e1e1'
                         }
                     },
                     V: {
@@ -74,17 +140,24 @@
                         title: {
                             text: 'Voltage (V)',
                             display: true
+                        },
+                        grid: {
+                            color: '#444'
+                        },
+                        ticks: {
+                            color: '#e1e1e1'
                         }
                     }
                 },
                 plugins: {
-                    // Add plugin options for crosshairs here
+                    annotation: {
+                        annotations: annotations
+                    }
                 }
             }
         });
 
-        // Logic for adding crosshairs can go here
+        // Populate the 'annotations' array and update the chart
     </script>
-
 </body>
 </html>

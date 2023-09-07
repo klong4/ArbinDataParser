@@ -54,9 +54,20 @@ def save_to_db(part_number, date, df):
 def get_records(part_number, test_date):
     with closing(sqlite3.connect(DATABASE)) as conn:
         c = conn.cursor()
-        c.execute('SELECT "Test_Time(s)", "Current(A)", "Voltage(V)" FROM tests WHERE part_number = ? AND Date_Time = ?',
+        c.execute('SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index" FROM tests WHERE part_number = ? AND Date_Time = ?',
                   (part_number, test_date))
-        return c.fetchall()
+        records = c.fetchall()
+        
+        if not records:
+            return None  # indicate that no records were found
+        
+    return records
+
+def delete_record(part_number, test_date):
+    with closing(sqlite3.connect(DATABASE)) as conn:
+        c = conn.cursor()
+        c.execute('DELETE FROM tests WHERE part_number = ? AND Date_Time = ?', (part_number, test_date))
+        conn.commit()
 
 # Call init_db to create the database table if it doesn't exist
 init_db()
