@@ -18,26 +18,17 @@
             </div>
             <div class="container">
                 <h3>Please Wait Awhile After Uploading</h3>
+            </div>
             <button type="submit">Upload</button>
-
         </form>
         
         <hr>
 
         <!-- Lookup Stored Information -->
-        <h2>Lookup Stored Information</h2>
-        <p>Select the part number and the date it was tested.</p>
-        <form id="selectionForm" action="/process" method="post">
-            <div class="form-group">
-                <label for="partNumber">Part Number:</label>
-                <input type="text" id="partNumber" name="partNumber" required>
-            </div>
-            <div class="form-group">
-                <label for="testDate">Test Date:</label>
-                <input type="date" id="testDate" name="testDate" required>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        <h2>Lookup Records by Part Number</h2>
+        <input type="text" id="partNumberInput" placeholder="Enter Part Number">
+        <button id="searchButton">Search</button> <!-- Removed onclick, added id -->
+        <div id="recordList"></div>
     </div>
 
     <script src="/static/js/main.js"></script>
