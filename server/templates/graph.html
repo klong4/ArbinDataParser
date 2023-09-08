@@ -30,11 +30,15 @@
     <button id="backButton">Go Back</button>
 
     <script>
-        const testTime = {{ test_date|tojson }};
+        const testTime = {{ test_time|tojson }};
         const currentA = {{ currentA|tojson }};
         const voltageV = {{ voltageV|tojson }};
         const stepIndices = {{ step_indices|tojson }};
         const cycleIndices = {{ cycle_indices|tojson }};
+
+        console.log('testTime:', testTime);
+        console.log('currentA:', currentA);
+        console.log('voltageV:', voltageV);      
 
         const annotations = [];
         let annotationCounter = 1;

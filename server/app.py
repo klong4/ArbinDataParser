@@ -2,10 +2,8 @@ from contextlib import closing
 from flask import Flask, jsonify, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from database_operations import save_to_db, get_records, delete_record, init_db
-from excel_parser import parse_excel_file, extract_date, extract_test_time, extract_part_number, extract_columns, read_file, extract_date, extract_test_time, extract_part_number, extract_columns, read_file
-import os
-import sqlite3
-import logging
+from excel_parser import parse_excel_file
+import os, sqlite3, logging
 
 # Initialize Flask and configurations
 app = Flask(__name__)
@@ -105,7 +103,7 @@ def get_records_for_part():
 @app.route('/api/debug', methods=['POST'])
 def debug():
     message = request.json.get('message', '')
-    with open('debug.log', 'a') as f:
+    with open('app.log', 'a') as f:
         f.write(message + '\n')
     return jsonify({'status': 'ok'})
 

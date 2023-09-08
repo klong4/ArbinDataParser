@@ -1,25 +1,51 @@
 let fullData = null;  // Store the full dataset
 let thinnedData = null;  // Store the thinned dataset
 
-// Function to thin data
-function thinData(data) {
-  // Implement your data-thinning algorithm here.
-  // For simplicity, let's take every 100th data point.
-  return data.filter((_, index) => index % 100 === 0);
+// Function to dynamically thin data based on the data length
+function dynamicThinData(data) {
+  // Determine the thinning step dynamically.
+  // If data length is less than 100, we take the whole data; otherwise, we divide it into 100 parts.
+  const step = data.length < 100 ? 1 : Math.floor(data.length / 100);
+  
+  const thinnedData = [];
+  
+  for (let i = 0; i < data.length; i += step) {
+    // Skip points that are NaN or undefined
+    if (data[i] === undefined || isNaN(data[i])) {
+      continue;
+    }
+    
+    // Add the data point to the thinned array
+    thinnedData.push(data[i]);
+  }
+  
+  return thinnedData;
 }
 
-// Function to aggregate data
-function aggregateData(data) {
-  // Implement your data aggregation algorithm here.
-  // For example, you can average every 100 points.
+// Function to aggregate data dynamically based on the data length
+function dynamicAggregateData(data) {
+  // Determine the aggregation step dynamically.
+  // If data length is less than 100, we take the whole data; otherwise, we divide it into 100 parts.
+  const step = data.length < 100 ? 1 : Math.floor(data.length / 100);
+  
   const aggregatedData = [];
-  for (let i = 0; i < data.length; i += 100) {
-    const slice = data.slice(i, i + 100);
+  
+  for (let i = 0; i < data.length; i += step) {
+    const slice = data.slice(i, i + step);
+    
+    // Skip slices that have insufficient data points or contain NaN or undefined
+    if (slice.length < step || slice.some(val => val === undefined || isNaN(val))) {
+      continue;
+    }
+    
+    // Calculate the average
     const avg = slice.reduce((acc, val) => acc + val, 0) / slice.length;
     aggregatedData.push(avg);
   }
+  
   return aggregatedData;
 }
+
 
 // Message handler for the Web Worker
 self.addEventListener('message', (e) => {
