@@ -9,16 +9,12 @@ body {
 
 .container {
   width: 60%; /* Adjust the width as needed */
-  height: auto; /* Allow the height to adjust based on content */
-  margin-top: 0; /* Remove top margin */
-  margin-right: auto; /* Center horizontally */
-  margin-left: auto; /* Center horizontally */
-  margin-bottom: 20%; /* Add 20% margin at the bottom */
-  padding: 0 20% 20%; /* 20% padding on left, right, and bottom */
+  height: 100vh; /* Use viewport height for full vertical space */
+  margin: 0 auto; /* Center horizontally */
+  padding: 0 20% 20%; /* Padding on left, right, and bottom */
   display: flex;
   flex-direction: column;
 }
-
 
 /* Header */
 .header {
@@ -56,8 +52,16 @@ body {
 }
 
 /* Graph Page (graph.html) */
+.graph-page-container {
+  height: 100vh; /* Use viewport height for full vertical space */
+  overflow: hidden; /* Hide any content that overflows */
+  display: flex;
+  flex-direction: column; /* Adjust flex layout for graph page */
+  padding: 0; /* Remove padding for the graph page */
+}
+
 .graph-container {
-  flex-grow: 1;
+  flex-grow: 1; /* Fill available space */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,7 +120,8 @@ body {
 .terminal-window {
   background-color: #1e1e1e;
   border-radius: 5px;
-  padding: 20px;
+  flex-grow: 1; /* Fill available space */
+  padding: 20px; /* Add padding on all sides */
 }
 
 .terminal-header {
@@ -158,4 +163,3 @@ body {
 .terminal-divider {
   border: 1px dashed #555;
 }
-

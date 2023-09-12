@@ -1,9 +1,11 @@
+# Import necessary modules
+import sqlite3
 from contextlib import closing
 from flask import Flask, jsonify, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from database_operations import save_to_db, get_records, delete_record, init_db
 from excel_parser import parse_excel_file
-import os, sqlite3, logging
+import os, logging
 
 # Initialize Flask and configurations
 app = Flask(__name__)
@@ -16,10 +18,8 @@ if not os.path.exists(UPLOAD_FOLDER):
 def get_records_by_part_number(part_number):
     with closing(sqlite3.connect(DATABASE)) as conn:
         c = conn.cursor()
-        logging.debug(f"Executing query for part_number: {part_number}")
         c.execute('SELECT * FROM tests WHERE part_number = ?', (part_number,))
         records = c.fetchall()
-        logging.debug(f"Query results: {records}")
         records_list = [{"test_time": r[2], "current": r[3], "voltage": r[4]} for r in records]
     return records_list
 
@@ -40,7 +40,6 @@ def upload_file():
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)
         
-        # Unpack all four values here
         selected_columns, date, test_time, part_number, cycle_index, step_index = parse_excel_file(filepath)
 
         url_friendly_date = date.replace("/", "-")
@@ -52,40 +51,28 @@ def upload_file():
 
 @app.route('/show_graph/<part_number>/<test_date>/')
 def show_graph(part_number, test_date):
-    print(f"Debug: Entered show_graph with part_number={part_number}, test_date={test_date}")  # Debug line
-
-    # Convert date format
-    standard_date = test_date.replace("-", "/")
+    data = get_records(part_number, test_date.replace("-", "/"))
     
-    # Fetch data from the database
-    data = get_records(part_number, standard_date)
-    print(f"Debug: Data fetched from get_records: {data}")  # Debug line
-    
-    # If no data is found, redirect to index
     if not data:
-        print("Debug: No data found. Redirecting to index.")  # Debug line
         return redirect(url_for('index'))
     
-    # Extract data from the database result
     extracted_data = list(zip(*data))
     
-    # Prepare the context for the template
     context = {
         'part_number': part_number,
-        'test_date': standard_date,
+        'test_date': test_date.replace("-", "/"),
         'test_time': extracted_data[0],
         'currentA': extracted_data[1],
         'voltageV': extracted_data[2],
-        'cycle_indices': extracted_data[3],  # Renamed from cycleIndex to be more Pythonic
-        'step_indices': extracted_data[4]  # Renamed from stepIndex to be more Pythonic
+        'cycle_indices': extracted_data[3],
+        'step_indices': extracted_data[4]
     }
 
     return render_template('graph.html', **context)
 
 @app.route('/delete_record/<part_number>/<test_date>', methods=['POST'])
 def delete_record_route(part_number, test_date):
-    standard_date = test_date.replace("-", "/")
-    delete_record(part_number, standard_date)
+    delete_record(part_number, test_date.replace("-", "/"))
     return redirect(url_for('index'))
 
 @app.route('/api/get_records_for_part')
@@ -106,6 +93,40 @@ def debug():
     with open('app.log', 'a') as f:
         f.write(message + '\n')
     return jsonify({'status': 'ok'})
+
+# Define the function to query the database for channel information
+def query_database_for_channel_info(part_number):
+    try:
+        conn = sqlite3.connect('my_database.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT channel_info FROM channel_info WHERE part_number = ?', (part_number,))
+        channel_info = cursor.fetchone()
+
+        if channel_info:
+            return channel_info[0]
+        else:
+            return None
+
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return None
+
+@app.route('/get_channel_info/<part_number>')
+def get_channel_info(part_number):
+    channel_info = query_database_for_channel_info(part_number)
+    
+    if channel_info:
+        return jsonify({"channel_info": channel_info})
+    else:
+        return jsonify({"error": "Channel info not found"}), 404
+    
+@app.route('/log', methods=['POST'])
+def log_message():
+    data = request.json
+    message = data.get('message', '')
+    with open('app.log', 'a') as f:
+        f.write(f"{message}\n")
+    return jsonify({"status": "success"}), 200
 
 if __name__ == '__main__':
     init_db()

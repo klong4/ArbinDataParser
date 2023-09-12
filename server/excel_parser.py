@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 def parse_excel_file(file_path):
-    part_number = extract_part_number(file_path)
+    part_number, channel_info = extract_part_and_channel(file_path)
     
     # Initialize df to None
     df = read_file(file_path)
@@ -20,11 +20,21 @@ def parse_excel_file(file_path):
         cycle_index = df['Cycle_Index']
         step_index = df['Step_Index']
     
-    return selected_columns, date, test_time, part_number, cycle_index, step_index  # Return new columns as well
+    return selected_columns, date, test_time, part_number, cycle_index, step_index
 
-def extract_part_number(file_path):
-    part_number = os.path.basename(file_path).split('_')[0]
-    return part_number
+def extract_part_and_channel(file_path):
+    file_name = os.path.basename(file_path)
+    parts = file_name.split('_')
+    part_number = parts[0]
+    channel_info = None
+    
+    # Find "Channel_xx" in the parts
+    for part in parts:
+        if part.startswith("Channel_"):
+            channel_info = part
+            break
+    
+    return part_number, channel_info
 
 def read_file(file_path):
     file_extension = os.path.splitext(file_path)[1].lower()

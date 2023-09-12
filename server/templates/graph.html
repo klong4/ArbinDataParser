@@ -10,22 +10,12 @@
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-    <div class="container terminal-window">
+    <div class="container terminal-window graph-page-container"> <!-- Add the class "graph-page-container" -->
         <div class="terminal-header">
             <h1>Arbin Voltage and Current / Time: {{ part_number }}</h1>
         </div>
         <div class="terminal-body">
             <h2>Date: {{ test_date }}</h2>
-
-            <div class="graph-container">
-                <canvas id="chart" class="graph"></canvas>
-            </div>
-
-            <!-- Data at Line Intersections -->
-            <div id="lineIntersections" class="terminal-output">
-                <h3>Data at Line Intersections:</h3>
-                <ul id="intersectionData"></ul>
-            </div>
 
             <!-- Button arrangement -->
             <div style="display: flex; gap: 20px;">
@@ -37,9 +27,19 @@
                 <!-- Back button -->
                 <button id="backButton" class="button">Go Back</button>
             </div>
+
+            <div class="graph-container">
+                <canvas id="chart" class="graph"></canvas>
+            </div>
+
+            <!-- Data at Line Intersections -->
+            <div id="lineIntersections" class="terminal-output">
+                <h3>Data at Line Intersections:</h3>
+                <ul id="intersectionData"></ul>
+            </div>
         </div>
     </div>
-    
+   
     <!-- Script -->
     <script>
         const testTime = {{ test_time|tojson }};

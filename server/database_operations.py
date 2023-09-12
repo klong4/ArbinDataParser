@@ -79,4 +79,36 @@ def delete_record(part_number, test_date):
         c.execute('DELETE FROM tests WHERE part_number = ? AND Date_Time = ?', (part_number, test_date))
         conn.commit()
 
+def get_channel_info(part_number):
+    try:
+        with closing(sqlite3.connect(DATABASE)) as conn:
+            c = conn.cursor()
+            query = 'SELECT channel_info FROM channel_info WHERE part_number = ?'
+            
+            logging.debug(f"Executing SQL Query: {query} with part_number={part_number}")
+            
+            c.execute(query, (part_number,))
+            channel_info = c.fetchone()
+            
+            logging.debug(f"Channel info fetched: {channel_info}")
+            
+            if not channel_info:
+                logging.warning(f"No channel info found for part_number={part_number}")
+                return None  # indicate that no channel info was found
+            
+        return channel_info[0] if channel_info else None
+    
+    except sqlite3.Error as error:
+        logging.error(f"SQLite Error: {error}")
+        return None
+
+if __name__ == "__main__":
+    # Example usage to retrieve channel info
+    part_number = "Your_Part_Number"  # Replace with the actual part number
+    channel_info = get_channel_info(part_number)
+    if channel_info:
+        print(f"Channel Info for Part Number {part_number}: {channel_info}")
+    else:
+        print(f"No Channel Info found for Part Number {part_number}")
+
 init_db()
