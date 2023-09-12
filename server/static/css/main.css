@@ -8,10 +8,17 @@ body {
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  width: 60%; /* Adjust the width as needed */
+  height: auto; /* Allow the height to adjust based on content */
+  margin-top: 0; /* Remove top margin */
+  margin-right: auto; /* Center horizontally */
+  margin-left: auto; /* Center horizontally */
+  margin-bottom: 20%; /* Add 20% margin at the bottom */
+  padding: 0 20% 20%; /* 20% padding on left, right, and bottom */
+  display: flex;
+  flex-direction: column;
 }
+
 
 /* Header */
 .header {
@@ -50,12 +57,21 @@ body {
 
 /* Graph Page (graph.html) */
 .graph-container {
-  margin-top: 20px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .graph {
-  width: 100%;
-  height: 400px;
+  width: calc(100% - 40px);  /* 100% of the parent container minus padding */
+  height: 100%;
+}
+
+/* Data at Line Intersections */
+#lineIntersections {
+  flex-shrink: 0;
+  margin-bottom: 20px;
 }
 
 .crosshair {
@@ -78,3 +94,68 @@ body {
 .button:hover {
   background-color: #0056b3;
 }
+
+/* Record Button Styles */
+.record-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border-radius: 15px;
+}
+
+.record-button:hover {
+  background-color: #3e8e41;
+}
+
+/* Terminal Styles */
+.terminal-window {
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.terminal-header {
+  color: #f0f0f0;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.terminal-body {
+  padding: 20px;
+  font-family: 'Courier New', monospace;
+  color: #8EC43D;
+}
+
+.terminal-prompt {
+  display: flex;
+  align-items: center;
+}
+
+.prompt-symbol {
+  color: #FF5733;
+  margin-right: 10px;
+}
+
+.terminal-input {
+  background-color: #333;
+  color: #8EC43D;
+  border: 1px solid #555;
+  padding: 5px;
+  margin: 10px 0;
+}
+
+.terminal-output {
+  border: 1px solid #555;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.terminal-divider {
+  border: 1px dashed #555;
+}
+
