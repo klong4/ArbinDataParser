@@ -2,7 +2,6 @@ import sqlite3, logging
 from contextlib import closing
 
 logging.basicConfig(filename='app.log', level=logging.DEBUG)
-
 DATABASE = 'my_database.db'
 
 def init_db():
@@ -16,35 +15,33 @@ def init_db():
                      "Current(A)" REAL,
                      "Voltage(V)" REAL,
                      "Cycle_Index" INTEGER,
-                     "Step_Index" INTEGER
+                     "Step_Index" INTEGER,
+                     channel_info TEXT
                      );''')
         conn.commit()
 
 def insert_record(records):
     with closing(sqlite3.connect(DATABASE)) as conn:
         c = conn.cursor()
-        c.executemany('INSERT INTO tests (part_number, Date_Time, "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index") VALUES (?, ?, ?, ?, ?, ?, ?)',
+        c.executemany('INSERT INTO tests (part_number, Date_Time, "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                       records)
         conn.commit()
 
-def update_record(id, part_number, date_time, test_time, current, voltage, cycle_index, step_index):
-    with closing(sqlite3.connect(DATABASE)) as conn:
-        c = conn.cursor()
-        c.execute('UPDATE tests SET part_number = ?, Date_Time = ?, "Test_Time(s)" = ?, "Current(A)" = ?, "Voltage(V)" = ?, "Cycle_Index" = ?, "Step_Index" = ? WHERE id = ?',
-                  (part_number, date_time, test_time, current, voltage, cycle_index, step_index, id))
-        conn.commit()
-
-def save_to_db(part_number, date, test_time, selected_columns, cycle_index, step_index):
+def save_to_db(part_number, date, test_time, selected_columns, cycle_index, step_index, channel_info):
     try:
         with closing(sqlite3.connect(DATABASE)) as conn:
             c = conn.cursor()
             
             records = []
             for index, row in selected_columns.iterrows():
-                # Assume the DataFrame columns align with your SQL table
-                records.append((part_number, date, row['Test_Time(s)'], row['Current(A)'], row['Voltage(V)'], row['Cycle_Index'], row['Step_Index']))
+                record = (part_number, date, row['Test_Time(s)'], row['Current(A)'], row['Voltage(V)'], row['Cycle_Index'], row['Step_Index'], channel_info)
+                records.append(record)
+                
+                # Debug: Print the first record
+                if index == 0:
+                    print(f"Debug: First record: {record}")
 
-            insert_record(records)  # Assuming you've a function to insert records
+            insert_record(records)
             conn.commit()
 
     except sqlite3.Error as e:
@@ -54,7 +51,7 @@ def get_records(part_number, test_date):
     try:
         with closing(sqlite3.connect(DATABASE)) as conn:
             c = conn.cursor()
-            query = 'SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index" FROM tests WHERE part_number = ? AND Date_Time = ?'
+            query = 'SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ?'
             
             logging.debug(f"Executing SQL Query: {query} with part_number={part_number}, test_date={test_date}")
             

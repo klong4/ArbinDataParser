@@ -1,11 +1,10 @@
 # Import necessary modules
-import sqlite3
 from contextlib import closing
 from flask import Flask, jsonify, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from database_operations import save_to_db, get_records, delete_record, init_db
 from excel_parser import parse_excel_file
-import os, logging
+import os, logging, sqlite3, re
 
 # Initialize Flask and configurations
 app = Flask(__name__)
@@ -16,12 +15,22 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 def get_records_by_part_number(part_number):
-    with closing(sqlite3.connect(DATABASE)) as conn:
-        c = conn.cursor()
-        c.execute('SELECT * FROM tests WHERE part_number = ?', (part_number,))
-        records = c.fetchall()
-        records_list = [{"test_time": r[2], "current": r[3], "voltage": r[4]} for r in records]
+    records_list = []
+    try:
+        with closing(sqlite3.connect(DATABASE)) as conn:
+            c = conn.cursor()
+            c.execute('SELECT * FROM tests WHERE part_number = ?', (part_number,))
+            records = c.fetchall()
+            col_names = [desc[0] for desc in c.description]
+            for r in records:
+                record_dict = {}
+                for idx, col in enumerate(col_names):
+                    record_dict[col] = r[idx]
+                records_list.append(record_dict)
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
     return records_list
+
 
 @app.route('/')
 def index():
@@ -29,25 +38,34 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    if 'file' not in request.files:
-        return redirect(request.url)
-    file = request.files['file']
-    if file.filename == '':
-        return redirect(request.url)
+    try:
+        if 'file' not in request.files:
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            return redirect(request.url)
 
-    if file and file.filename.endswith(('.xlsx', '.csv')):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(UPLOAD_FOLDER, filename)
-        file.save(filepath)
+        if file and file.filename.endswith(('.xlsx', '.csv')):
+            filename = secure_filename(file.filename)
+            
+            channel_info_match = re.search(r'Channel_(\w+)_Wb', filename)
+            channel_info = channel_info_match.group(1) if channel_info_match else None
+            print(f"Debug: Extracted channel_info: {channel_info}")
+            
+            filepath = os.path.join(UPLOAD_FOLDER, filename)
+            file.save(filepath)
+            
+            selected_columns, date, test_time, part_number, cycle_index, step_index = parse_excel_file(filepath)
+            print(f"Debug: Extracted date: {date}")
+            
+            url_friendly_date = date.replace("/", "-")
+            save_to_db(part_number, date, test_time, selected_columns, cycle_index, step_index, channel_info)
+            
+            return redirect(url_for('show_graph', part_number=part_number, test_date=url_friendly_date, test_time=test_time))
         
-        selected_columns, date, test_time, part_number, cycle_index, step_index = parse_excel_file(filepath)
-
-        url_friendly_date = date.replace("/", "-")
-
-        save_to_db(part_number, date, test_time, selected_columns, cycle_index, step_index)
-        return redirect(url_for('show_graph', part_number=part_number, test_date=url_friendly_date, test_time=test_time))
-
-    return "File type not supported"
+        return "File type not supported"
+    except Exception as e:
+        return f"An error occurred: {e}"
 
 @app.route('/show_graph/<part_number>/<test_date>/')
 def show_graph(part_number, test_date):
