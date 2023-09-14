@@ -1,0 +1,258 @@
+document.addEventListener('DOMContentLoaded', () => {
+  initPage();
+  preventFormSubmissionIfNoFileSelected();
+});
+
+function preventFormSubmissionIfNoFileSelected() {
+  const uploadForm = document.getElementById('uploadForm');
+  uploadForm.addEventListener('submit', function(event) {
+    const fileInput = this.querySelector('input[type="file"]');
+    if (!fileInput.files.length) {
+      event.preventDefault();
+      alert('Please select a file');
+    }
+  });
+}
+
+function initPage() {
+  const dataWorker = new Worker('static/js/dataWorker.js');
+  const elements = fetchElementsById([
+    "partNumberInput", "channelInput", "recordList",
+    "submitButton", "searchButton", "graphContainer", "backButton"
+  ]);
+  attachEventListeners(elements, dataWorker);
+}
+
+function fetchElementsById(ids) {
+  return ids.reduce((acc, id) => {
+    acc[id] = document.getElementById(id);
+    return acc;
+  }, {});
+}
+
+function attachEventListeners(elements, dataWorker) {
+  attachClickEventListener(elements.submitButton, 'submitButton');
+  attachClickEventListener(elements.searchButton, 'searchButton');
+  attachScrollEventListener(elements.graphContainer, dataWorker);
+  attachClickEventListener(elements.backButton, 'backButton');
+  dataWorker.onmessage = handleDataWorkerMessages;
+}
+
+function attachInputEventListener(partNumberInput, channelInput, recordList) {
+  if (!partNumberInput || !channelInput || !recordList) {
+    console.error('One of the elements is missing. Cannot attach event listener.');
+    return;
+  }
+
+  partNumberInput.addEventListener('input', () => {
+    const partNumber = partNumberInput.value.trim();
+    const channelInput = channelInput.value.trim(); // Get channelInput here
+    console.log(`Debug: partNumber = ${partNumber}, channel = ${channelInput}`);
+    if (partNumber && channelInput) {
+      fetchAndUpdate(`/api/get_records_for_part?part_number=${partNumber}&channel=${channelInput}`, data => {
+        updateOutputElement(recordList, data.records, partNumber, channelInput);
+      });
+    } else {
+      clearOutputElement(recordList);
+    }
+  });
+}
+
+function attachScrollEventListener() {
+  const graphContainer = document.getElementById('graphContainer');
+  if (graphContainer) {
+    graphContainer.addEventListener('scroll', () => {
+      if (isElementScrolledToBottom(graphContainer)) {
+        console.log('Scrolled to bottom');
+      }
+    });
+  }
+}
+
+function attachClickEventListener(element, eventType) {
+  if (element) {
+    element.addEventListener('click', () => handleClickEvents(eventType));
+  }
+}
+
+function handleClickEvents(eventType) {
+  switch (eventType) {
+    case 'submitButton':
+      // Your existing logic for 'submitButton'
+      break;
+      
+    case 'searchButton':
+      const partNumberInput = document.getElementById('partNumberInput');
+      const channelInput = document.getElementById('channelInput');
+      
+      if (partNumberInput && channelInput) {
+        const partNumber = partNumberInput.value.trim();
+        const channel = channelInput.value.trim();
+
+        fetchAndUpdate(`/api/get_records_for_part?part_number=${partNumber}&channel=${channel}`, data => {
+          const searchResultsDiv = document.getElementById("searchResults");
+          if (searchResultsDiv) {
+            searchResultsDiv.innerHTML = '';
+            const seenCombinations = new Set();
+            
+            if (data.records && data.records.length > 0) {
+              // Existing logic to populate records
+              data.records.forEach(record => {
+                const date = record.Date_Time;
+                const formattedDate = formatDateForURL(date);
+                const uniqueKey = `${formattedDate}-${partNumber}-${channel}`;
+                if (!seenCombinations.has(uniqueKey)) {
+                  createRecordLink(record, partNumber, searchResultsDiv, formattedDate, channel);
+                  seenCombinations.add(uniqueKey);
+                }
+              });
+              
+              // New logic to create buttons based on unique date and channel combinations
+              const uniqueCombinations = new Set();
+              data.records.forEach(record => {
+                const date = record.Date_Time;
+                const channel = record.Channel; // Assuming 'Channel' is the key in your record
+                const uniqueKey = `${date}-${channel}`;
+                uniqueCombinations.add(uniqueKey);
+              });
+              
+              const buttonContainer = document.getElementById("buttonContainer");
+              buttonContainer.innerHTML = "";
+              
+              uniqueCombinations.forEach(combination => {
+                const [date, channel] = combination.split('-');
+                const btn = document.createElement("button");
+                btn.innerHTML = `Date: ${date}, Channel: ${channel}`;
+                btn.onclick = function() {
+                  // Action when the button is clicked
+                  window.location.href = `/some_page?date=${date}&channel=${channel}`;
+                };
+                buttonContainer.appendChild(btn);
+              });
+              
+            } else {
+              searchResultsDiv.innerHTML = 'No records found';
+            }
+          }
+        });
+      } else {
+        console.error('Input elements not found.');
+      }
+      break;
+      
+    case 'backButton':
+      window.history.back();
+      break;
+  }
+}
+
+function logToServer(message) {
+  fetch('/log', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ message: message })
+  });
+}
+
+function formatDateForURL(dateString) {
+  const parts = dateString.split('/');
+  if (parts.length === 3) {
+    const [month, day, year] = parts;
+    return `${month}-${day}-${year}`;
+  }
+  return null;
+}
+
+function fetchAndUpdate(url, callback, options = {}) {
+  fetch(url, options)
+    .then(response => response.json())
+    .then(data => callback(data))
+    .catch(error => console.error('Error:', error));
+}
+
+function isElementScrolledToBottom(element) {
+  return element.scrollTop + element.clientHeight >= element.scrollHeight;
+}
+
+function updateOutputElement(element, records, partNumber, channel) {
+  if (element) {
+    element.innerHTML = '';
+    records.forEach(record => createRecordLink(record, partNumber, element, channel));
+  }
+}
+
+function clearOutputElement(element) {
+  if (element) {
+    element.innerHTML = '';
+  }
+}
+
+function createRecordLink(record, partNumber, parentElement, formattedDate, channelInfo) {
+  const requiredFields = [
+    "Test_Time(s)", "channel_info", "part_number", "Date_Time",
+    "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index"
+  ];
+  let missingFields = [];
+  const normalizedRecord = {};
+  for (const key in record) {
+    normalizedRecord[normalizeKey(key)] = record[key];
+  }
+  for (const field of requiredFields) {
+    if (normalizedRecord[normalizeKey(field)] === null || normalizedRecord[normalizeKey(field)] === undefined) {
+      missingFields.push(field);
+    }
+  }
+  if (missingFields.length > 0) {
+    const missingFieldsString = missingFields.join(", ");
+    const message = `Skipping record due to missing ${missingFieldsString}: ${JSON.stringify(record)}`;
+    fetch('/log', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message })
+    }).then(response => {
+      if (response.ok) {
+        console.log('Logged missing fields to app.log on the server.');
+      } else {
+        console.error('Failed to log missing fields to app.log on the server.');
+      }
+    }).catch(error => {
+      console.error(`Error logging missing fields to app.log: ${error}`);
+    });
+    return;
+  }
+
+  const listItem = document.createElement("a");
+
+  // Construct the link text with date and channel information
+  const linkText = `${formattedDate} : Channel ${channelInfo}_${partNumber}`;
+  listItem.textContent = linkText;
+
+  // Generate the link URL
+  const linkURL = `/show_graph/${partNumber}/${formattedDate}/${channelInfo}}`;
+  listItem.href = linkURL;
+
+  listItem.className = "record-button";
+  parentElement.appendChild(listItem);
+}
+
+function handleDataWorkerMessages(e) {
+  const { type, payload } = e.data;
+  const graphContainer = document.getElementById('graphContainer');
+  if (type === 'INITIAL_LOAD') {
+    const img = document.createElement('img');
+    img.src = payload.graphURL;
+    graphContainer.innerHTML = '';
+    graphContainer.appendChild(img);
+  } else if (type === 'LAZY_LOAD') {
+    console.log("Received lazy-load data:", payload);
+  }
+}
+
+function normalizeKey(key) {
+  return key.toLowerCase().replace(/[\s_()]/g, '');
+}
+

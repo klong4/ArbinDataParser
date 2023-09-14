@@ -6,6 +6,9 @@ from database_operations import save_to_db, get_records, delete_record, init_db
 from excel_parser import parse_excel_file
 import os, logging, sqlite3, re
 
+# Configure logging
+logging.basicConfig(filename='app.log', level=logging.INFO)
+
 # Initialize Flask and configurations
 app = Flask(__name__)
 UPLOAD_FOLDER = './server/uploads'
@@ -31,7 +34,6 @@ def get_records_by_part_number(part_number):
         print(f"Database error: {e}")
     return records_list
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -48,28 +50,28 @@ def upload_file():
         if file and file.filename.endswith(('.xlsx', '.csv')):
             filename = secure_filename(file.filename)
             
-            channel_info_match = re.search(r'Channel_(\w+)_Wb', filename)
+            channel_info_match = re.search(r'Channel_(\d+)_Wb', filename)  # Updated regex pattern to match digits
             channel_info = channel_info_match.group(1) if channel_info_match else None
             print(f"Debug: Extracted channel_info: {channel_info}")
             
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
             
-            selected_columns, date, test_time, part_number, cycle_index, step_index = parse_excel_file(filepath)
+            selected_columns, date, test_time, part_number, cycle_index, step_index, _ = parse_excel_file(filepath)  # Discard the unused channel_info here
             print(f"Debug: Extracted date: {date}")
             
             url_friendly_date = date.replace("/", "-")
             save_to_db(part_number, date, test_time, selected_columns, cycle_index, step_index, channel_info)
             
-            return redirect(url_for('show_graph', part_number=part_number, test_date=url_friendly_date, test_time=test_time))
+            return redirect(url_for('show_graph', part_number=part_number, test_date=url_friendly_date, channel_info=channel_info))  # Updated "channel_info" parameter
         
         return "File type not supported"
     except Exception as e:
         return f"An error occurred: {e}"
 
-@app.route('/show_graph/<part_number>/<test_date>/')
-def show_graph(part_number, test_date):
-    data = get_records(part_number, test_date.replace("-", "/"))
+@app.route('/show_graph/<part_number>/<test_date>/<channel_info>')
+def show_graph(part_number, test_date, channel_info):  # Added "channel_info" parameter
+    data = get_records(part_number, test_date.replace("-", "/"), channel_info)  # Passed "channel_info"
     
     if not data:
         return redirect(url_for('index'))
@@ -83,15 +85,21 @@ def show_graph(part_number, test_date):
         'currentA': extracted_data[1],
         'voltageV': extracted_data[2],
         'cycle_indices': extracted_data[3],
-        'step_indices': extracted_data[4]
+        'step_indices': extracted_data[4],
+        'channel_info': extracted_data[5]
     }
 
     return render_template('graph.html', **context)
 
-@app.route('/delete_record/<part_number>/<test_date>', methods=['POST'])
+@app.route('/delete_record/<part_number>/<test_date>', methods=['GET', 'POST'])
 def delete_record_route(part_number, test_date):
-    delete_record(part_number, test_date.replace("-", "/"))
-    return redirect(url_for('index'))
+    if request.method == 'POST':
+        channel_info = request.form['channel_info']
+        delete_record(part_number, test_date.replace("-", "/"), channel_info)
+        return redirect(url_for('index'))
+    else:
+        # Handle GET request if needed
+        pass
 
 @app.route('/api/get_records_for_part')
 def get_records_for_part():

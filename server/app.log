@@ -1,102 +1,263 @@
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:11] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:11] "GET /static/js/main.js HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:11] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:11] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:11] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:11] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:12] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:13] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:13] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:13] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:13:13] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:14:36] "GET /api/get_records_for_part?part_number=DGH506Q2R7 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:15:03] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:15:03] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:15:03] "GET /static/js/main.js HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:15:03] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:15:16] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:15:16] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:15:16] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:15:16] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
+Handling click event: searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:30:39] "POST /log HTTP/1.1" 200 -
+partNumberInput: [object HTMLInputElement]
+Search button clicked
+channelInput: null
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:30:39] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:30:39] "POST /log HTTP/1.1" 200 -
+Input elements not found
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:30:39] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:30:39] "POST /log HTTP/1.1" 200 -
 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
 INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 528-950-504
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:55] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:16:58] "GET /api/get_records_for_part?part_number=DGH506Q2R7 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:17:17] "[32mPOST /upload HTTP/1.1[0m" 302 -
-DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index" FROM tests WHERE part_number = ? AND Date_Time = ? with part_number=DSF506Q3R0, test_date=09/08/2023
-DEBUG:root:Number of records fetched: 8282
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:17:17] "GET /show_graph/DSF506Q3R0/09-08-2023/?test_time=1.0001 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:17:17] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:17:27] "GET /api/get_records_for_part?part_number=DSF506Q3R0 HTTP/1.1" 200 -
-INFO:werkzeug: * Detected change in 'C:\\Code Projects\\ArbinDataParser\\ArbinDataParser\\server\\app.py', reloading
-INFO:werkzeug: * Restarting with stat
-WARNING:werkzeug: * Debugger is active!
-INFO:werkzeug: * Debugger PIN: 528-950-504
-INFO:werkzeug: * Detected change in 'C:\\Code Projects\\ArbinDataParser\\ArbinDataParser\\server\\app.py', reloading
-INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+DOM fully loaded and parsed
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+Initializing page
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for searchButton
+Attaching event listeners
+Attaching click event listener for submitButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+Attaching scroll event listener
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for backButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+Entering preventFormSubmissionIfNoFileSelected
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:17] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
+Handling click event: searchButton
+Search button clicked
+partNumberInput: [object HTMLInputElement]
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:21] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:21] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:21] "POST /log HTTP/1.1" 200 -
+channelInput: null
+Input elements not found
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:21] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:31:21] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:35:34] "[32mPOST /upload HTTP/1.1[0m" 302 -
+DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ? with part_number=DGH256Q2R7, test_date=09/14/2023, channel_info=9
+DEBUG:root:Number of records fetched: 23451
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:35:34] "GET /show_graph/DGH256Q2R7/09-14-2023/9 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:35:34] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
 INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 528-950-504
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:29:10] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:29:10] "GET /static/js/main.js HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:29:10] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:29:10] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:29:16] "GET /api/get_records_for_part?part_number=DSF506Q3R0 HTTP/1.1" 200 -
-Skipping record due to missing test_time or channelInfo: {"current":1.0001,"test_time":"09/08/2023","voltage":0}
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:29:16] "POST /log HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:43:28] "GET /api/get_records_for_part?part_number=DSF506Q3R0 HTTP/1.1" 200 -
-Skipping record due to missing test_time or channelInfo: {"current":1.0001,"test_time":"09/08/2023","voltage":0}
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:43:28] "POST /log HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:43:41] "GET /api/get_records_for_part?part_number=DSF506Q3R0 HTTP/1.1" 200 -
-Skipping record due to missing test_time or channelInfo: {"current":1.0001,"test_time":"09/08/2023","voltage":0}
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:43:41] "POST /log HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:43:55] "[32mPOST /upload HTTP/1.1[0m" 302 -
-DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index" FROM tests WHERE part_number = ? AND Date_Time = ? with part_number=DSF506Q3R0, test_date=09/08/2023
-DEBUG:root:Number of records fetched: 16562
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:43:55] "GET /show_graph/DSF506Q3R0/09-08-2023/?test_time=1.0004 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:43:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:44:09] "GET /api/get_records_for_part?part_number=DSF506Q3R0 HTTP/1.1" 200 -
-Skipping record due to missing test_time or channelInfo: {"current":1.0001,"test_time":"09/08/2023","voltage":0}
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:44:09] "POST /log HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:45:02] "GET /api/get_records_for_part?part_number=DSF506Q3R0 HTTP/1.1" 200 -
-Skipping record due to missing test_time or channelInfo: {"current":1.0001,"test_time":"09/08/2023","voltage":0}
-INFO:werkzeug:127.0.0.1 - - [12/Sep/2023 16:45:02] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "GET /static/js/main.js HTTP/1.1" 200 -
+DOM fully loaded and parsed
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "POST /log HTTP/1.1" 200 -
+Initializing page
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "POST /log HTTP/1.1" 200 -
+Attaching event listeners
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for submitButton
+Attaching click event listener for searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:32] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:41] "[32mPOST /upload HTTP/1.1[0m" 302 -
+DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ? with part_number=DGH256Q2R7, test_date=09/14/2023, channel_info=10
+DEBUG:root:Number of records fetched: 7722
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:41] "GET /show_graph/DGH256Q2R7/09-14-2023/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:41] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+Initializing page
+DOM fully loaded and parsed
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:45] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:45] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:45] "POST /log HTTP/1.1" 200 -
+Attaching event listeners
+Attaching click event listener for submitButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:46] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:46] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:46] "POST /log HTTP/1.1" 200 -
+Handling click event: searchButton
+Search button clicked
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:49] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:49] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:45:49] "GET /api/get_records_for_part?part_number=DGH256Q2R7 HTTP/1.1" 200 -
+DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ? with part_number=DGH256Q2R7, test_date=09/14/2023, channel_info=10
+DEBUG:root:Number of records fetched: 7722
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:46:05] "GET /show_graph/DGH256Q2R7/09-14-2023/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:46:05] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+Initializing page
+DOM fully loaded and parsed
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:46:08] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:46:08] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+Attaching event listeners
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:46:08] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for submitButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:46:08] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:46:08] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:46:08] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 528-950-504
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "GET /static/js/main.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+DOM fully loaded and parsed
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "POST /log HTTP/1.1" 200 -
+Initializing page
+Fetching elements by ID
+Attaching event listeners
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for submitButton
+Attaching click event listener for searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:28] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
+Handling click event: searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:31] "POST /log HTTP/1.1" 200 -
+Search button clicked
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:31] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:31] "GET /api/get_records_for_part?part_number=DGH256Q2R7 HTTP/1.1" 200 -
+DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ? with part_number=DGH256Q2R7, test_date=09/14/2023, channel_info=10
+DEBUG:root:Number of records fetched: 7722
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:33] "GET /show_graph/DGH256Q2R7/09-14-2023/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:33] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+DOM fully loaded and parsed
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:36] "POST /log HTTP/1.1" 200 -
+Initializing page
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:36] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:36] "POST /log HTTP/1.1" 200 -
+Attaching event listeners
+Attaching click event listener for submitButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:36] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:36] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:36] "POST /log HTTP/1.1" 200 -
+Search button clicked
+Handling click event: searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:37] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:37] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:37] "GET /api/get_records_for_part?part_number=DGH256Q2R7 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:54] "[32mPOST /upload HTTP/1.1[0m" 302 -
+DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ? with part_number=DGH256Q2R7, test_date=09/14/2023, channel_info=9
+DEBUG:root:Number of records fetched: 7817
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:54] "GET /show_graph/DGH256Q2R7/09-14-2023/9 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:54] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+DOM fully loaded and parsed
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:56] "POST /log HTTP/1.1" 200 -
+Initializing page
+Fetching elements by ID
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:56] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:56] "POST /log HTTP/1.1" 200 -
+Attaching event listeners
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:56] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for submitButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:56] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:56] "POST /log HTTP/1.1" 200 -
+Handling click event: searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:57] "POST /log HTTP/1.1" 200 -
+Search button clicked
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:57] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:57] "GET /api/get_records_for_part?part_number=DGH256Q2R7 HTTP/1.1" 200 -
+DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ? with part_number=DGH256Q2R7, test_date=09/14/2023, channel_info=9
+DEBUG:root:Number of records fetched: 7817
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:58] "GET /show_graph/DGH256Q2R7/09-14-2023/9 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:48:59] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+DOM fully loaded and parsed
+Initializing page
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:49:00] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:49:00] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+Attaching event listeners
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:49:00] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:49:00] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for submitButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:49:00] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:49:00] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 528-950-504
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "GET /static/js/main.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+DOM fully loaded and parsed
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "POST /log HTTP/1.1" 200 -
+Initializing page
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+Attaching event listeners
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for searchButton
+Attaching click event listener for submitButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:07] "[36mGET /static/js/dataWorker.js HTTP/1.1[0m" 304 -
+Handling click event: searchButton
+Search button clicked
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:10] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:10] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:51:10] "GET /api/get_records_for_part?part_number=DGH256Q2R7 HTTP/1.1" 200 -
+DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ? with part_number=DGH256Q2R7, test_date=09/14/2023, channel_info=10
+DEBUG:root:Number of records fetched: 7722
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:04] "GET /show_graph/DGH256Q2R7/09-14-2023/10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:04] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+DOM fully loaded and parsed
+Initializing page
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:07] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:07] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+Attaching event listeners
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:07] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:07] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for submitButton
+Attaching click event listener for searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:07] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:07] "POST /log HTTP/1.1" 200 -
+Handling click event: searchButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:08] "POST /log HTTP/1.1" 200 -
+Search button clicked
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:08] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:08] "GET /api/get_records_for_part?part_number=DGH256Q2R7 HTTP/1.1" 200 -
+DEBUG:root:Executing SQL Query: SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ? with part_number=DGH256Q2R7, test_date=09/14/2023, channel_info=9
+DEBUG:root:Number of records fetched: 7817
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:09] "GET /show_graph/DGH256Q2R7/09-14-2023/9 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:09] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+DOM fully loaded and parsed
+Initializing page
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:13] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:13] "POST /log HTTP/1.1" 200 -
+Fetching elements by ID
+Attaching event listeners
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:13] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:13] "POST /log HTTP/1.1" 200 -
+Attaching click event listener for searchButton
+Attaching click event listener for submitButton
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:13] "POST /log HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2023 16:52:13] "POST /log HTTP/1.1" 200 -

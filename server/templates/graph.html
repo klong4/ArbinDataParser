@@ -16,11 +16,13 @@
         </div>
         <div class="terminal-body">
             <h2>Date: {{ test_date }}</h2>
+            <h2>Channel Info: {{ channel_info[0] }}</h2>
 
             <!-- Button arrangement -->
             <div style="display: flex; gap: 20px;">
                 <!-- Delete button -->
                 <form action="{{ url_for('delete_record_route', part_number=part_number, test_date=test_date.replace('/', '-')) }}" method="post">
+                    <input type="hidden" name="channel_info" value="{{ channel_info }}">
                     <button type="submit" class="button">Delete Record</button>
                 </form>
                 

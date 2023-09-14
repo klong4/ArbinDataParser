@@ -1,4 +1,4 @@
-import os
+import os, re
 import pandas as pd
 
 def parse_excel_file(file_path):
@@ -20,7 +20,7 @@ def parse_excel_file(file_path):
         cycle_index = df['Cycle_Index']
         step_index = df['Step_Index']
     
-    return selected_columns, date, test_time, part_number, cycle_index, step_index
+    return selected_columns, date, test_time, part_number, cycle_index, step_index, channel_info
 
 def extract_part_and_channel(file_path):
     file_name = os.path.basename(file_path)
@@ -28,10 +28,11 @@ def extract_part_and_channel(file_path):
     part_number = parts[0]
     channel_info = None
     
-    # Find "Channel_xx" in the parts
+    # Find "Channel_xx" in the parts and extract only the digits
     for part in parts:
-        if part.startswith("Channel_"):
-            channel_info = part
+        match = re.search(r'Channel_(\d{1,2})', part)  # \d{1,2} matches 1 or 2 digits
+        if match:
+            channel_info = match.group(1)  # Get only the first capturing group (the digits)
             break
     
     return part_number, channel_info
