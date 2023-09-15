@@ -63,15 +63,15 @@ def upload_file():
             url_friendly_date = date.replace("/", "-")
             save_to_db(part_number, date, test_time, selected_columns, cycle_index, step_index, channel_info)
             
-            return redirect(url_for('show_graph', part_number=part_number, test_date=url_friendly_date, channel_info=channel_info))  # Updated "channel_info" parameter
+            return redirect(url_for('show_graph', part_number=part_number, Date_Time=url_friendly_date, channel_info=channel_info))  # Updated "channel_info" parameter
         
         return "File type not supported"
     except Exception as e:
         return f"An error occurred: {e}"
 
-@app.route('/show_graph/<part_number>/<test_date>/<channel_info>')
-def show_graph(part_number, test_date, channel_info):  # Added "channel_info" parameter
-    data = get_records(part_number, test_date.replace("-", "/"), channel_info)  # Passed "channel_info"
+@app.route('/show_graph/<part_number>/<Date_Time>/<channel_info>')
+def show_graph(part_number, Date_Time, channel_info):  # Added "channel_info" parameter
+    data = get_records(part_number, Date_Time.replace("-", "/"), channel_info)  # Passed "channel_info"
     
     if not data:
         return redirect(url_for('index'))
@@ -80,7 +80,7 @@ def show_graph(part_number, test_date, channel_info):  # Added "channel_info" pa
     
     context = {
         'part_number': part_number,
-        'test_date': test_date.replace("-", "/"),
+        'Date_Time': Date_Time.replace("-", "/"),
         'test_time': extracted_data[0],
         'currentA': extracted_data[1],
         'voltageV': extracted_data[2],
@@ -91,11 +91,11 @@ def show_graph(part_number, test_date, channel_info):  # Added "channel_info" pa
 
     return render_template('graph.html', **context)
 
-@app.route('/delete_record/<part_number>/<test_date>', methods=['GET', 'POST'])
-def delete_record_route(part_number, test_date):
+@app.route('/delete_record/<part_number>/<Date_Time>', methods=['GET', 'POST'])
+def delete_record_route(part_number, Date_Time):
     if request.method == 'POST':
         channel_info = request.form['channel_info']
-        delete_record(part_number, test_date.replace("-", "/"), channel_info)
+        delete_record(part_number, Date_Time.replace("-", "/"), channel_info)
         return redirect(url_for('index'))
     else:
         # Handle GET request if needed

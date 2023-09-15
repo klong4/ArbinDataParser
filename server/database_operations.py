@@ -47,21 +47,21 @@ def save_to_db(part_number, date, test_time, selected_columns, cycle_index, step
     except sqlite3.Error as e:
         print(f"Database error: {e}")
 
-def get_records(part_number, test_date, channel_info):
+def get_records(part_number, Date_Time, channel_info):
     try:
         with closing(sqlite3.connect(DATABASE)) as conn:
             c = conn.cursor()
             query = 'SELECT "Test_Time(s)", "Current(A)", "Voltage(V)", "Cycle_Index", "Step_Index", channel_info FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ?'
             
-            logging.debug(f"Executing SQL Query: {query} with part_number={part_number}, test_date={test_date}, channel_info={channel_info}")
+            logging.debug(f"Executing SQL Query: {query} with part_number={part_number}, Date_Time={Date_Time}, channel_info={channel_info}")
             
-            c.execute(query, (part_number, test_date, channel_info))
+            c.execute(query, (part_number, Date_Time, channel_info))
             records = c.fetchall()
             
             logging.debug(f"Number of records fetched: {len(records)}")
             
             if not records:
-                logging.warning(f"No records found for part_number={part_number}, test_date={test_date}, channel_info={channel_info}")
+                logging.warning(f"No records found for part_number={part_number}, Date_Time={Date_Time}, channel_info={channel_info}")
                 return None  # indicate that no records were found
             
         return records
@@ -71,11 +71,11 @@ def get_records(part_number, test_date, channel_info):
         return None
 
 # Update the delete_record function to accept channel_info
-def delete_record(part_number, test_date, channel_info):
+def delete_record(part_number, Date_Time, channel_info):
     try:
         with closing(sqlite3.connect(DATABASE)) as conn:
             c = conn.cursor()
-            c.execute('DELETE FROM tests WHERE part_number = ? AND test_date = ? AND channel_info = ?', (part_number, test_date, channel_info))
+            c.execute('DELETE FROM tests WHERE part_number = ? AND Date_Time = ? AND channel_info = ?', (part_number, Date_Time, channel_info))
             conn.commit()
     except sqlite3.Error as e:
         print(f"Database error: {e}")
